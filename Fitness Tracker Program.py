@@ -34,4 +34,42 @@ class FitnessTracker:
         self.goals[goal_type] = target_value 
         print(f"Set goal: {goal_type} to {target_value}") # Allows you to set a fitness goal.
 
-    
+    def track_progress(self): # Allows you to track your progress.
+        """Display the logged workouts and current goals."""
+        print("\n--- Workout Log ---")
+        for workout in self.workouts:
+            print(f"Date: {workout['date']}, Type: {workout['workout_type']}, "
+                  f"Duration: {workout['duration']} min, Calories: {workout['calories']} cal")
+
+
+        print("\n--- Fitness Goals ---") # Allows you to track your progress.
+        for goal_type, target_value in self.goals.items():
+            print(f"{goal_type}: {target_value}")
+
+
+    def total_calories_burned(self): # Allows you to view how many calories you have burned.
+        """Calculate the total calories burned from logged workouts."""
+        total_calories = sum(workout['calories'] for workout in self.workouts)
+        return total_calories
+
+
+# Main program
+if __name__ == "__main__":
+    tracker = FitnessTracker()
+
+
+    # Example usage
+    tracker.log_workout('2024-08-01', 'Running', 30, 300)
+    tracker.log_workout('2024-08-02', 'Cycling', 45, 450)
+   
+    tracker.set_goal('Weekly Distance', 15)  # Set a goal for distance
+    tracker.set_goal('Weight Loss', 5)        # Set a goal for weight loss
+
+
+    # Track progress
+    tracker.track_progress()
+
+
+    # Display total calories burned
+    total_calories = tracker.total_calories_burned()
+    print(f"\nTotal Calories Burned: {total_calories} cal")
